@@ -1,6 +1,5 @@
 
 
-import comment from "../model/comment.js";
 import Comment from "../model/comment.js"
 export const newComment=async(req,res)=>{
    try{
@@ -31,3 +30,16 @@ export const deleteComment=async(req,res)=>{
      res.status(500).json({msg:error.message})
    }
 }
+
+// export const editComment=async(req,res)=>{
+//   try{
+//      const post=await Comment.findById(req.params.id);
+//      if(!post){
+//       return res.status(404).json({msg:'comment does not found in the database'})
+//      }
+//      await post.findByIdAndUpdate(req.params.id,{$set:req.body})// $set-->to replace the object, $addToSet-->to append the object
+//      return res.status(200).json({msg:'Post upadated successfully'})
+//   }catch(error){
+//       return res.status(500).json({msg:error.message})
+//   }
+// }

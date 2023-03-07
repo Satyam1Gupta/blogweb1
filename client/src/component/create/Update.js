@@ -58,7 +58,7 @@ export default function Update() {
     const updateBlogPost=async()=>{
        const res=  await API.updatePost(post);
        if(res.isSuccess){
-        navigate(`/details/${id}`)
+        navigate(`/post/${id}`)
        }
     }
 

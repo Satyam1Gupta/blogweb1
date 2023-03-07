@@ -1,5 +1,7 @@
 import React,{useState,useContext,useEffect} from 'react'
 import { Box,styled, TextareaAutosize, Button } from '@mui/material'
+import TextField from '@mui/material/TextField';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import { DataContext } from '../../../context/DataProvider'
 import{API} from '../../../service/api'
 import Comment from './Comment'
@@ -13,8 +15,8 @@ const Image=styled('img')({
     height:45,
     borderRadius:'50%'
 })
-const StyleTextareaAutosize=styled(TextareaAutosize)`
-height:100px;
+const StyleTextareaAutosize=styled(Box)`
+
 width:50%;
 margin: 0 20px;
 border:none
@@ -22,12 +24,15 @@ border:none
 
 const initialValues={
     name:'',
+    userName:'',
     postId:'',
     comments:'',
     date:new Date()
 }
 export default function Comments({post}) {
-
+  
+  const username=sessionStorage.getItem('userName');
+  const name=sessionStorage.getItem('name');
    const[comment,setComment]=useState(initialValues);
    const[comments,setComments]=useState([]);
    const{acount}=useContext(DataContext)
@@ -45,7 +50,8 @@ export default function Comments({post}) {
 
    const handleChange=(e)=>{
         setComment({...comment,
-             name:acount.name,
+             name:name,
+             userName:username,
              postId:post._id,
              comments:e.target.value,
              date:new Date()
@@ -65,17 +71,27 @@ export default function Comments({post}) {
   return (
     <Box>
       <Container>
-        <Image src={url} alt='dp'/>
-        <StyleTextareaAutosize 
-        minRows={3}
-        placeholder="What's on your mind?" 
+        {/* <Image src={url} alt='dp'/> */}
+        <Box sx={{ display: 'flex', alignItems: 'flex-end',width: '75%' }}>
+          <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+          <TextField 
+           sx={{width: '100%'}} 
+          placeholder="Add a comment" 
+          variant="standard" 
+          value={comment.comments}
+          onChange={(e)=>{handleChange(e)}}
+          />
+       </Box>
+        {/* <StyleTextareaAutosize 
+        minRows={1}
+        placeholder="Add a comment" 
         value={comment.comments}
         onChange={(e)=>{handleChange(e)}}
-        />
+        /> */}
         <Button variant='contained' color='primary'
          size='medium' style={{height:30}}
          onClick={()=>addComment()} >
-            Post
+            Comment
         </Button>
       </Container>
       <Box>

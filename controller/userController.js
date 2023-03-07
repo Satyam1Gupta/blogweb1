@@ -34,6 +34,7 @@ if(!user){
 }
 try{
 let match=await bcrypt.compare(req.body.password,user.password)
+
 if(match){
 //res.status(200).json({msg:"Successfully logged in"})
 const accessToken=jwt.sign(user.toJSON(), process.env.access_secret_key,{expiresIn:'60m'});

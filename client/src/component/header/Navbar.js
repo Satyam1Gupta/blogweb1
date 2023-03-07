@@ -23,7 +23,7 @@ export default function Navbar() {
         <Link to='/'>Home</Link>
         <Link to='/'>About</Link>
         <Link to ='/'>Contact</Link>
-        <Link to='/login'>Logout</Link>
+        <Link to='/login'>Login</Link>
       </Container>
     </Component>
   )

@@ -31,7 +31,6 @@ const password=process.env.db_password;
 const DB=process.env.MONGODB_URI ||`mongodb+srv://${username}:${password}@cluster0.i4nhnfk.mongodb.net/Blog?retryWrites=true&w=majority`;
 
 connection(DB);
-
 // const bodyParser = require('body-parser'); 
 // app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }))

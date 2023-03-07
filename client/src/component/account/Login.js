@@ -110,6 +110,8 @@ export default function Login({setUserAuthenticated}) {
 
       sessionStorage.setItem('accessToken',`${res.data.accessToken}`);
       sessionStorage.setItem('refreshToken',`Bearer${res.data.refreshToken}`);
+      sessionStorage.setItem('userName',res.data.username);
+      sessionStorage.setItem('name',res.data.name);
 
       setAcount({username:res.data.username,name:res.data.name});
       setUserAuthenticated(true);

@@ -40,8 +40,9 @@ export default function App() {
           <Route path='/create' element={<PrivateRoute userAuthenticated={userAuthenticated}/>}>
             <Route path='/create' element={<CreatePost/>}/>
           </Route>
-          <Route path='/details/:id' element={<PrivateRoute userAuthenticated={userAuthenticated}/>}>
-            <Route path='/details/:id' element={<DetailView/>}/>
+          
+          <Route path='/post/:id' element={<PrivateRoute userAuthenticated={userAuthenticated}/>}>
+          <Route path='/post/:id' element={<DetailView/>}/>
           </Route>
           <Route path='/update/:id' element={<PrivateRoute userAuthenticated={userAuthenticated}/>}>
             <Route path='/update/:id' element={<Update/>}/>

@@ -29,7 +29,7 @@ export default function Posts() {
        {
           post && post.length>0 ? post.map(pos =>(
             <Grid item lg={3} sm={3} xs={12} key={pos._id} >
-            <Link to={`details/${pos._id}`} style={{textDecoration:'none',color:'inherit'}}>
+            <Link  to={`post/${pos._id}`} style={{textDecoration:'none',color:'inherit'}}>
             <Post post={pos}/>
             </Link>
             </Grid>

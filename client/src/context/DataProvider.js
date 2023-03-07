@@ -4,6 +4,8 @@ export const DataContext=createContext(null);
 
 const DataProvider=({children})=>{
     const[acount,setAcount]=useState({username:'',name:''})
+    
+    
 
     return(
         <DataContext.Provider value={{
