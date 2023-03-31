@@ -4,7 +4,7 @@ import Router from './routes/route.js';
 import cors from 'cors';
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';
-import path from 'path'
+//import path from 'path'
 
 dotenv.config();
 const app=express();

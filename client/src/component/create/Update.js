@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { Box, styled ,FormControl, InputBase, Button,TextareaAutosize} from '@mui/material'
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useRef } from 'react'
 import { useNavigate, useLocation,useParams } from 'react-router-dom'
 import { DataContext } from '../../context/DataProvider'
 import { API } from '../../service/api'
-
+import JoditEditor from 'jodit-react'
 
 const Container=styled(Box)(({theme})=>({
     margin:'50px 100px',
@@ -40,8 +40,12 @@ const initialPost={
     description:'',
     picture:'',
     username:'',
+    name:'',
     categories:'',
     createDate:new Date()
+}
+const config={
+    buttons:["bold","italic","link",'ul','ol','image','paragraph','fullsize',]
 }
 export default function Update() {
     
@@ -51,8 +55,14 @@ export default function Update() {
     const navigate=useNavigate();
     const {acount}=useContext(DataContext);
     const{id}=useParams();
+    const editor=useRef(null)
+
     const handleChange=(e)=>{
         setPost({...post,[e.target.name]:e.target.value})
+    }
+    const handleChang=(key,val)=>{
+        setPost({...post,[key]:val})
+       
     }
 
     const updateBlogPost=async()=>{
@@ -78,6 +88,7 @@ export default function Update() {
         getImage();
        post.categories=location.search?.split('=')[1] || 'all';
        post.username=acount.username;
+       post.name=acount.name;
     },[file])
 
     useEffect(()=>{
@@ -104,11 +115,18 @@ export default function Update() {
                 Update
             </Button>
          </StFormctrl>
-         <Textarea 
+         {/* <Textarea 
          minRows={5}
          placeholder='Tell me your story.....!'
          onChange={(e)=>handleChange(e)} name='description'
          value={post.description}
+         /> */}
+          <JoditEditor
+         name='description'
+         ref={editor}
+         value={post.description}
+         onChange={(val)=>handleChang('description',val)} 
+         config={config}
          />
     </Container>
   )

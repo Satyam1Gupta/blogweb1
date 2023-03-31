@@ -9,7 +9,7 @@ const Container=styled(Box)`
 border:1px solid #d3cede;
 border-radius:10px;
 margin:10px;
-height:350px;
+height:220px;
 display:flex;
 align-items:center;
 flex-direction:column;
@@ -21,7 +21,7 @@ const Image=styled('img')({
     width: '100%',
     borderRadius:'10px 10px 0 0',
     objectFit:'cover',
-    height:'155px'
+    height:'110px'
 })
 const Text=styled(Typography)`
 color:#878787;
@@ -35,7 +35,7 @@ font-size:14px;
 word-break:break-word;
 `;
 
-export default function Post({post}) {
+export default function ({post}) {
 
     let user_name=post.name?post.name:post.username;
     const url=post.picture?post.picture:'https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80';
@@ -43,9 +43,9 @@ export default function Post({post}) {
     <Container>
         <Image src={url} alt='blog'/>
         <Text>{post.categories}</Text>
-        <Heading>{ addEllipsis(post.title,20)}</Heading>
+        <Heading>{ addEllipsis(post.title,30)}</Heading>
         <Text>{user_name}</Text>
-        <Desc>{addEllipsis(post.description,95)}</Desc>
+        {/* <Desc>{addEllipsis(post.description,30)}</Desc> */}
     </Container>
   )
 }

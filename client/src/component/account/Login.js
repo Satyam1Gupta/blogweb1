@@ -1,10 +1,11 @@
 import React from 'react'
-import { useState,useContext } from 'react';
+import { useState,useContext,useEffect } from 'react';
 import {Box,TextField,Button,styled,Typography} from '@mui/material'
 import {API} from '../../service/api'
 import { DataContext } from '../../context/DataProvider';
 import{useNavigate} from 'react-router-dom'
-
+import jwt_decode from 'jwt-decode'
+//import '../../component/create/app.css'
 //import { typography } from '@mui/system';
 //import styled from '@emotion/styled/types/base';
 
@@ -69,7 +70,7 @@ export default function Login({setUserAuthenticated}) {
 
   const navigate=useNavigate();
     const imageURL = 'https://www.sesta.it/wp-content/uploads/2021/03/logo-blog-sesta-trasparente.png';
-    const [account, setAccount]=useState('login');
+    const [account, setAccount]=useState('signup');
 
     const {setAcount}=useContext(DataContext);
 
@@ -80,6 +81,32 @@ export default function Login({setUserAuthenticated}) {
    const[error,setError]=useState('');
    const[signUp,setSignUp]=useState(signUpInitialValue);
    const[login,setLogin]=useState({username:'',password:''})
+
+   function handleCallbackResponse(res){
+    console.log("JWT:",res.credential)
+    var userObject=jwt_decode(res.credential)
+    console.log(userObject)
+    sessionStorage.setItem('accessToken',`${res.credential}`);
+     // sessionStorage.setItem('refreshToken',`Bearer${res.data.refreshToken}`);
+      sessionStorage.setItem('userName',userObject.email);
+      sessionStorage.setItem('name',userObject.name);
+      setAcount({username:userObject.email,name:userObject.name});
+      setUserAuthenticated(true);
+
+      navigate('/')
+   }
+useEffect(()=>{
+  /*global google*/
+  google.accounts.id.initialize({
+    client_id:"73722603471-od8ul6rp1es90fuqi2c054qg7pud7cbu.apps.googleusercontent.com",
+    callback: handleCallbackResponse
+  });
+  google.accounts.id.renderButton(
+    document.getElementById("googleSignin"),
+    {theme:"outline",size:"large"}
+  )
+},[account]);
+
 
    const onChangeInput=(e)=>{
     //console.log(e.target.name, e.target.value);
@@ -116,7 +143,7 @@ export default function Login({setUserAuthenticated}) {
       setAcount({username:res.data.username,name:res.data.name});
       setUserAuthenticated(true);
 
-      navigate('/');
+      navigate('/')
 
     } else{
      setError('Something went wrong, please try again later...!')
@@ -134,6 +161,7 @@ export default function Login({setUserAuthenticated}) {
                 <TextField  variant="standard" label='Enter Password'onChange={(e)=>onChangeValue(e)} name='password'/> 
                 { <Error > {error} </Error>}
                 <LoginButton variant="contained" onClick={()=>loginUser()}>Login</LoginButton>
+                <div id="googleSignin"></div>
                 <Typography>OR</Typography>
                 <SignUpButton variant="text" onClick={()=>handleSignUp()}>Create an account</SignUpButton>
             </Wrapper>
@@ -144,6 +172,7 @@ export default function Login({setUserAuthenticated}) {
                 <TextField  variant="standard" label='Enter Password'onChange={(e)=>onChangeInput(e)}name='password'/> 
                 { <Error > {error} </Error>}
                 <LoginButton  variant="contained"onClick={()=>signupUser()}>Sign Up</LoginButton>
+                <div id="googleSignin"></div>
                 <Typography>OR</Typography>
                 <SignUpButton variant="text" onClick={()=>handleSignUp()}>Already have an account</SignUpButton>
             </Wrapper>}

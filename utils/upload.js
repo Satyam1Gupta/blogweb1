@@ -15,7 +15,7 @@ const storage= new GridFsStorage({
     options:{useNewUrlParser:true},
     options: {useUnifiedTopology: true},
     file:(req,file)=>{
-        const match=['image/png','image/jpg','image/jpeg',"application/pdf"];
+        const match=['image/png','image/jpg','image/jpeg'];
         
         if(match.indexOf(file.mimetype)!==-1){
             return `${Date.now()}-blog-${file.originalname}`;
