@@ -63,6 +63,11 @@ export default function DetailView() {
     const{acount}=useContext(DataContext);
     const navigate=useNavigate()
     
+    //On render it will show the top of detailview
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+
     useEffect(()=>{
         const fetchData=async()=>{
           const res=await API.getPostById(id);

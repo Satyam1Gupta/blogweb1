@@ -43,7 +43,7 @@ export default function ({post}) {
     <Container>
         <Image src={url} alt='blog'/>
         <Text>{post.categories}</Text>
-        <Heading>{ addEllipsis(post.title,30)}</Heading>
+        <Heading>{ addEllipsis(post.title,25)}</Heading>
         <Text>{user_name}</Text>
         {/* <Desc>{addEllipsis(post.description,30)}</Desc> */}
     </Container>

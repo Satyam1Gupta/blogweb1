@@ -11,7 +11,7 @@ export default function Posts() {
     
     const[searchParams]=useSearchParams();
     const category=searchParams.get('category');
-    console.log(category)
+    //1console.log(category)
 
     useEffect(()=>{
         const fetchData=async()=>{
@@ -22,7 +22,7 @@ export default function Posts() {
         }
         fetchData();
     },[category])
-    console.log(post)
+    //console.log(post)
 
   return (
    <>
