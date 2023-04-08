@@ -72,7 +72,6 @@ background:#e6e6e6;
 margin-top:10px;
 max-height:180px;
 border-radius:10px;
-
 overflow-y:scroll;
 position:absolute;
 z-index:1;
@@ -80,6 +79,7 @@ z-index:1;
 export default function Navbar() {
   const[size,setSize]=useState(window.innerWidth)
   const[toggle,setToggle]=useState(true)
+  const[screen_lg_than_600,setScreen_lg_than_600]=useState(false)
   const[input,setInput]=useState('')
   //setSize(window.screen.width)
   function resize() {
@@ -90,7 +90,7 @@ export default function Navbar() {
   //console.log(input);
 function handleClick(){
   setToggle(false)
-  setSize(640)
+  setScreen_lg_than_600(true)
 }
 
   return (
@@ -106,7 +106,7 @@ function handleClick(){
         }
        <Box>
        {
-        size>=600 &&
+        (size>=600 || screen_lg_than_600) &&
         <Search>
         <SearchIconWrapper>
           <SearchIcon />
@@ -124,7 +124,7 @@ function handleClick(){
         </SearchR>
        </Box>
        {
-         size<600 &&
+         size<600 && !screen_lg_than_600 &&
          <Button style={{color:'inherit'  }}onClick={()=>handleClick()}>
           <SearchIcon  />
          </Button>

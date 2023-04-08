@@ -22,16 +22,18 @@ export default function SearchResult({input}) {
         // const s2=input.toLowerCase().split(" ")
         // console.log(s1+" "+ s2)
        
-        if(input=="")
+        if(input==="")
             return ;
         else if(val.title.toLowerCase().includes(input.toLowerCase()))
          return val;
-        //  else{
-        //     let s= input.toLowerCase().split(" ").filter(item =>val.title.toLowerCase().split(" ").includes(item))
-        //     console.log(s)
-        //  return val;
+         else{
+            // let s= input.toLowerCase().split(" ").filter(item =>val.title.toLowerCase().split(" ").includes(item))
+            // console.log(s)
+            let wordsTypedByTheUser = input.toLowerCase().split(' ');
+            return wordsTypedByTheUser.every(word => val.title.toLowerCase().includes(word));
+         //return val;
         
-        //  }
+         }
     }
     function redirect(pos_id){
         navigate(`/post/${pos_id}`)
