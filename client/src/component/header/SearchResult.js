@@ -26,12 +26,12 @@ export default function SearchResult({input}) {
             return ;
         else if(val.title.toLowerCase().includes(input.toLowerCase()))
          return val;
-         else{
-            let s= input.toLowerCase().split(" ").filter(item =>val.title.toLowerCase().split(" ").includes(item))
-            console.log(s)
-         return val;
+        //  else{
+        //     let s= input.toLowerCase().split(" ").filter(item =>val.title.toLowerCase().split(" ").includes(item))
+        //     console.log(s)
+        //  return val;
         
-         }
+        //  }
     }
     function redirect(pos_id){
         navigate(`/post/${pos_id}`)
