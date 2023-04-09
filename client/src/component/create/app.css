@@ -1,0 +1,27 @@
+/* .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+    border-radius: '10px';
+    margin-left: 40px;
+    border-color: rgb(30, 8, 228);
+ } */
+/* Set a border around images in the editor */
+img {
+    width:85%;
+    
+}
+/* img {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 4px;
+  } */
+  /* Set a border around uploaded images */
+.jodit_wysiwyg img[data-image-id] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 4px;
+  }
+  
+  .jodit-status-bar {
+    visibility: hidden;
+}
