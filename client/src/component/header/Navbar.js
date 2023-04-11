@@ -112,7 +112,7 @@ function handleClick(){
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Search your question..."
+          placeholder="Search your question"
           inputProps={{ 'aria-label': 'search' }}
           value={input}
           onChange={(e)=>{setInput(e.target.value)}}
