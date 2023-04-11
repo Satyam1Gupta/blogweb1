@@ -8,7 +8,7 @@ import { useState } from 'react'
 import CreatePost from './component/create/Create-Post'
 import DetailView from './component/details/DetailView'
 import Update from './component/create/Update'
-//comment
+
 const PrivateRoute=({userAuthenticated,...props})=>{
   return userAuthenticated?
   <>

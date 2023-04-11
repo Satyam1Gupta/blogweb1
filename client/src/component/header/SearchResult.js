@@ -39,7 +39,7 @@ export default function SearchResult({input}) {
         navigate(`/post/${pos_id}`)
     }
     function reload(){
-        navigate(0)
+        navigate(0);
     }
   return (
     <>
