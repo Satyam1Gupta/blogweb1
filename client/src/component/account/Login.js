@@ -64,6 +64,7 @@ font-weight:600;
 const signUpInitialValue={
 name:'',
 username:'',
+userImage:'',
 password:''
 };
 export default function Login({setUserAuthenticated}) {
@@ -82,6 +83,17 @@ export default function Login({setUserAuthenticated}) {
    const[signUp,setSignUp]=useState(signUpInitialValue);
    const[login,setLogin]=useState({username:'',password:''})
 
+   async function handleGoogleUser(username,name,userImg){
+      const googleUser={
+                name:name,
+                 username:username,
+                 userImage:userImg
+                }
+      let res= await API.googleSignup(googleUser);
+      console.log(res)
+      sessionStorage.setItem('userId',res.data._id);
+   }
+
    function handleCallbackResponse(res){
     console.log("JWT:",res.credential)
     var userObject=jwt_decode(res.credential)
@@ -90,13 +102,15 @@ export default function Login({setUserAuthenticated}) {
      // sessionStorage.setItem('refreshToken',`Bearer${res.data.refreshToken}`);
       sessionStorage.setItem('userName',userObject.email);
       sessionStorage.setItem('name',userObject.name);
+      sessionStorage.setItem('userImg',userObject.picture);
       setAcount({username:userObject.email,name:userObject.name});
       setUserAuthenticated(true);
-
+      handleGoogleUser(userObject.email,userObject.name,userObject.picture);
       navigate('/')
    }
 useEffect(()=>{
   /*global google*/
+ 
   google.accounts.id.initialize({
     client_id:"73722603471-od8ul6rp1es90fuqi2c054qg7pud7cbu.apps.googleusercontent.com",
     callback: handleCallbackResponse
@@ -104,6 +118,7 @@ useEffect(()=>{
   google.accounts.id.renderButton(
     document.getElementById("googleSignin"),
     {theme:"outline",size:"large"}
+   
   )
 },[account]);
 
@@ -172,7 +187,7 @@ useEffect(()=>{
                 <TextField  variant="standard" label='Enter Password'onChange={(e)=>onChangeInput(e)}name='password'/> 
                 { <Error > {error} </Error>}
                 <LoginButton  variant="contained"onClick={()=>signupUser()}>Sign Up</LoginButton>
-                <div id="googleSignin"></div>
+                <div id="googleSignin" ></div>
                 <Typography>OR</Typography>
                 <SignUpButton variant="text" onClick={()=>handleSignUp()}>Already have an account</SignUpButton>
             </Wrapper>}

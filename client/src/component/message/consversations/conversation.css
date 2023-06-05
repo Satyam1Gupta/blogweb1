@@ -1,0 +1,20 @@
+.conversation{
+    display: flex;
+    align-items: center;
+    padding:10px;
+    cursor:pointer;
+    margin-top: 5px;
+}
+.conversation:hover{
+    background-color: rgb(247, 242, 242);
+}
+.convImg{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit:cover;
+    margin-right: 15px;
+}
+.convName{
+    font-weight: 500;
+}

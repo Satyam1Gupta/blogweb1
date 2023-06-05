@@ -4,14 +4,20 @@ import Router from './routes/route.js';
 import cors from 'cors';
 import bodyParser from "body-parser";
 import dotenv from 'dotenv';
+import socketServer from './socketServer.js';
+ import http from 'http';
+ 
 //import path from 'path'
 
 dotenv.config();
 const app=express();
+const server=http.createServer(app)//server created for chat app
 //app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json({extended:true}))
 app.use(bodyParser.urlencoded({extended:true}));
+
+socketServer(server)// Chat app start
 
 // if(process.env.NODE_ENV==='production'){  //this is will execute on heroku only
 //      app.use(express.static("client/build"));
@@ -24,7 +30,7 @@ app.get("/",(req,res)=>{
 app.use('/',Router);
 
 const PORT=process.env.PORT || 8000;
-app.listen(PORT, ()=>{console.log(`server is running on port ${PORT}`)})
+server.listen(PORT, ()=>{console.log(`server is running on port ${PORT}`)});
 
 const username=process.env.DB_USERNAME;
 const password=process.env.db_password;

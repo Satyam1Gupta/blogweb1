@@ -8,9 +8,12 @@ const userSchema=mongoose.Schema({
         type:String,
         required:true
     },
+    userImage:{
+        type:String,
+    },
     password:{
         type:String,
-        required:true
+        //here required true is in pending task....>
     }
 })
 const User= mongoose.model('blogsignup',userSchema);

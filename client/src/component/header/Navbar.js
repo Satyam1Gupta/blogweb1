@@ -100,7 +100,7 @@ function handleClick(){
           toggle &&
          <>
             <Link to='/'>Home</Link>
-            <Link to='/'>About</Link>
+            <Link to='/message'>Message</Link>
             <Link to='/login'>Login</Link>
          </>
         }

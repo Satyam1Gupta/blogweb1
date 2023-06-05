@@ -8,6 +8,7 @@ import { useState } from 'react'
 import CreatePost from './component/create/Create-Post'
 import DetailView from './component/details/DetailView'
 import Update from './component/create/Update'
+import Message from './component/message/Message'
 //comment
 const PrivateRoute=({userAuthenticated,...props})=>{
   return userAuthenticated?
@@ -39,6 +40,9 @@ export default function App() {
 
           <Route path='/create' element={<PrivateRoute userAuthenticated={userAuthenticated}/>}>
             <Route path='/create' element={<CreatePost/>}/>
+          </Route>
+          <Route path='/message' element={<PrivateRoute userAuthenticated={userAuthenticated}/>}>
+            <Route path='/message' element={<Message/>}/>
           </Route>
           
           <Route path='/post/:id' element={<PrivateRoute userAuthenticated={userAuthenticated}/>}>

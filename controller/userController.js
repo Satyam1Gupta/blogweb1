@@ -1,10 +1,28 @@
 import User from '../model/user.js'
 import Token from '../model/token.js'
+//import googleUser from '../model/googleuser.js';
+
 import  jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 
 dotenv.config();
+
+export const googleSignup=async(req,res)=>{
+  
+    const newUser=new User(req.body)
+    let user=await User.findOne({username: req.body.username})
+    if(user){
+      return res.status(200).json(user)
+    }
+       try{
+        const savedUser=await newUser.save()
+        res.status(200).json(savedUser)
+     
+       }catch(error){
+         res.status(500).json({msg:error.message})
+       }
+    }
 
  export const signupUser= async(req,res)=>{
    //console.log(req.body);
@@ -52,4 +70,26 @@ res.status(500).json({msg:"Error while login"})
 }
 }
 
+export const getUserById=async(req,res)=>{
+ 
+  try{
+      let user=await User.findOne({_id: req.params.userId})
+      //console.log("hi"+req.params.userId)
+      res.status(200).json(user)
+   
+     }catch(error){
+       res.status(500).json({msg:error.message})
+     }
+  }
+export const getAllUser=async(req,res)=>{
+ 
+  try{
+      let user=await User.find()
+      //console.log("hi"+req.params.userId)
+      res.status(200).json(user)
+   
+     }catch(error){
+       res.status(500).json({msg:error.message})
+     }
+  }
 

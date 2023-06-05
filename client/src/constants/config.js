@@ -29,6 +29,7 @@ export const api_notification_msg={
 //need service call:{url:'/',method:'POST/GET/PUT/DELETE', params: true/false,query: true/false}
 export const service_urls={
     userSignup:{url:'/signup',method:'POST',contentType:'application/json'},
+    googleSignup:{url:'/google_signup',method:'POST',contentType:'application/json'},
     userLogin:{url:'/login',method:'POST'},
     uploadFile:{url:'/file/upload',method:'POST',contentType:'multipart/form-data'},
     createPost:{url:'/create',method:'POST',contentType:'application/json'},
@@ -39,5 +40,12 @@ export const service_urls={
     newComment:{url:'/comment/new',method:'POST'},
     getAllComments:{url:'/comments',method:'GET',query:true},
     deleteComment:{url:'/comment/delete',method:'DELETE',query:true},
-    editComment:{url:'/comment/edit',method:'PUT',query:true}
+    editComment:{url:'/comment/edit',method:'PUT',query:true},
+    
+    newConversation:{url:'/message_user',method:'POST'},
+    getConversation:{url:'/message_get_user',method:'GET',query:true},
+    getUserById:{url:'/get_user',method:'GET',query:true},
+    getMessages:{url:'/get_messages',method:'GET',query:true},
+    postMessages:{url:'/post_messages',method:'POST',contentType:'application/json'},
+    getAllUser:{url:'/get_all_user',method:'GET'},
 }

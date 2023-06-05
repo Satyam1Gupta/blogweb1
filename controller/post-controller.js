@@ -14,7 +14,7 @@ export const createPost=async(req,res)=>{
 
 export const getAllPosts=async(req,res)=>{
 let category=req.query.category;
-console.log(category);
+//console.log(category);
 let posts;
 
     try{
