@@ -5,7 +5,7 @@ const socketServer=async(server)=>{
     //chat app--->
     const io= new Server(server,{
         cors: {
-             origin:"http://localhost:3000",
+             origin:"",//in case of localHost origin:"http://localhost:3000"
              methods: ["GET","POST"],
         },
    });

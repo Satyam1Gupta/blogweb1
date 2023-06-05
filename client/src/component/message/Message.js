@@ -8,7 +8,7 @@ import{API} from '../../service/api'
 import SearchFriend from './consversations/SearchFriend'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const socket=io.connect("http://localhost:8000");
+const socket=io.connect("");//for localHost io.connect("http://localhost:8000");
 export default function Message() {
     const[conversation,setConversation]=useState([]);
     const[currentChat,setCurrentChat]=useState(null);
