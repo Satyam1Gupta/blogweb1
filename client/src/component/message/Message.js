@@ -3,7 +3,6 @@ import io from 'socket.io-client'
 import "./message.css";
 import Conversation from './consversations/Conversation';
 import Msg from './consversations/Msg';
-import ChatOnline from './consversations/ChatOnline';
 import{API} from '../../service/api'
 import SearchFriend from './consversations/SearchFriend'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -13,12 +12,13 @@ export default function Message() {
     const[conversation,setConversation]=useState([]);
     const[currentChat,setCurrentChat]=useState(null);
     const[user,setUser]=useState(null);
+    const[arivalMessages,setArivalMessages]=useState([]);
     const[messages,setMessages]=useState([]);
     const[newMessages,setNewMessages]=useState('');
     const scrollRef=useRef();
     const[toggle,setToggle]=useState(true)
     const[size,setSize]=useState(window.innerWidth)
-    const[isYourFriendOnline,setIsYourFriendOnline]=useState(false)
+    const[onlineUser,setOnlineUser]=useState([])
     const userId=sessionStorage.getItem('userId');
     
 //console.log("h"+userId)
@@ -28,24 +28,23 @@ export default function Message() {
         socket.emit("add_user",userId)
         socket.on("get_users",(users)=>{
             // console.log(users)
-            // console.log(user)
-            if(users.find((u)=>u.userId===user?._id)){
-                setIsYourFriendOnline(true)
-                
-            }
-            else{
-                setIsYourFriendOnline(false)
-            }
-            console.log(isYourFriendOnline);
+            setOnlineUser(users);
         })
-    },[newMessages])
+    },[user])
    
     useEffect(()=>{
     socket.on("get_msg",(data)=>{
-        console.log(data)
-        setMessages((prev)=>[...prev,data]);
+        //onsole.log("hi",data)
+        
+        setArivalMessages(data);
     })
     },[socket])
+
+    useEffect(()=>{
+    arivalMessages &&
+    currentChat?.members.includes(arivalMessages.senderId)&&
+        setMessages((prev)=>[...prev,arivalMessages]);
+    },[arivalMessages,currentChat])
 
     //End of socket
 
@@ -78,9 +77,7 @@ export default function Message() {
 
     const handleSubmit=async(e)=>{
         //e.preventDefault();
-        console.log("h")
-        if(isYourFriendOnline){
-            
+      //socket server
             const msgData={
                 senderId:userId,
                 receiverId:user._id,
@@ -88,8 +85,7 @@ export default function Message() {
                 createdAt:Date.now()
             }
              socket.emit("send_msg",msgData)
-           }
-
+         
         const message={
             senderId:userId,
             text:newMessages,
@@ -149,13 +145,11 @@ const getUserDetail=async(conversation)=>{
             {
                 conversation.map((c)=>(
                     <div onClick={()=>{setCurrentChat(c);handleClick();getUserDetail(c)}}key={c._id}>
-                     <Conversation conversation={c}currentUserId={userId}  />
+                     <Conversation conversation={c}currentUserId={userId} onlineUser={onlineUser} />
                    </div>
                 ))
             }
-            <ChatOnline/>
-            <ChatOnline/>
-            <ChatOnline/>
+          
             </div>
         </div>
         }

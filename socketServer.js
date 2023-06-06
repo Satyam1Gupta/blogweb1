@@ -41,7 +41,7 @@ const socketServer=async(server)=>{
              console.log(data)
              const user=getUser(data.receiverId)
              console.log(user);
-             io.to(user.socketId).emit("get_msg",data)
+             io.to(user?.socketId).emit("get_msg",data);
         })
    
    //When disconnect

@@ -5,7 +5,7 @@ import { getAccessToken, getType } from '../utils/common-utils';
 
 const axiosInstance=axios.create({
     
-        baseURL:'',//URL of the server(incase of local host it is:"http://localhost:8000")
+        baseURL:""||'',//URL of the server(incase of local host it is:"http://localhost:8000")
         timeout: 10000,
        
         //headers: {'content-type': 'application/json'}

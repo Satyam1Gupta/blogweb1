@@ -13,8 +13,22 @@
     height: 32px;
     border-radius: 50%;
     object-fit:cover;
-    margin-right: 15px;
+    border:1px solid white;
 }
 .convName{
     font-weight: 500;
+}
+.OnlineImgContainer{
+    position: relative;
+   margin-right: 15px;
+    
+}
+.chatOnlinBadge{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: limegreen;
+    position: absolute;
+    top:0;
+    right:0;
 }
