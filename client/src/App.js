@@ -32,6 +32,7 @@ export default function App() {
     <DataProvider>
       <div style={{marginTop:80}}>
         <Routes>
+          
           <Route path='/login' element={<Login setUserAuthenticated={setUserAuthenticated}/>}/>
           
           <Route path='/' element={<PrivateRoute userAuthenticated={userAuthenticated}/>}>

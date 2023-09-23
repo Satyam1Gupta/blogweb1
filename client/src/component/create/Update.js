@@ -6,6 +6,7 @@ import { useNavigate, useLocation,useParams } from 'react-router-dom'
 import { DataContext } from '../../context/DataProvider'
 import { API } from '../../service/api'
 import JoditEditor from 'jodit-react'
+import './app.css'
 
 const Container=styled(Box)(({theme})=>({
     margin:'50px 100px',
@@ -45,8 +46,11 @@ const initialPost={
     createDate:new Date()
 }
 const config={
-    buttons:["bold","italic","link",'ul','ol','image','paragraph','fullsize',]
+    buttons:["bold","italic","link",'ul','ol','image','paragraph','fullsize',],
+    fontSize:20
 }
+
+  
 export default function Update() {
     
     const [post,setPost]=useState(initialPost);
@@ -126,7 +130,9 @@ export default function Update() {
          ref={editor}
          value={post.description}
          onChange={(val)=>handleChang('description',val)} 
-         config={config}
+         //className="custom-editor-font-size" 
+        //config={config}
+        style={{fontSize:20}}
          />
     </Container>
   )

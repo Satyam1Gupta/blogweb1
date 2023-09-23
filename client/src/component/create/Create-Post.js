@@ -46,7 +46,8 @@ const initialPost={
     createDate:new Date()
 };
 const config={
-    buttons:["bold","italic","link",'ul','ol','image','paragraph','fullsize']
+    buttons:["bold","italic","link",'ul','ol','image','paragraph','fullsize'],
+    //  fontSize: '24px'
 }
 export default function CreatePost() {
     
@@ -85,7 +86,7 @@ export default function CreatePost() {
                 data.append('name',file.name);
                 data.append('file',file);
                  //API CALL
-                 console.log(file);
+                //  console.log(file);
                  const response= await API.uploadFile(data);
 
                 post.picture=response.data;
@@ -97,7 +98,7 @@ export default function CreatePost() {
       post.username= username
       post.name= name
     },[file])
-console.log(post)
+//console.log(post)
     const url=post.picture?post.picture:'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80'
     
     return (
@@ -123,7 +124,8 @@ console.log(post)
          name='description'
          ref={editor}
          value={post.description}
-         config={config}
+        // config={config}
+         className="custom-editor-font-size" 
          onChange={(val)=>handleChang('description',val)} 
          />
     </Container>

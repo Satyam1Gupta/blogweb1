@@ -25,3 +25,26 @@ img {
   .jodit-status-bar {
     visibility: hidden;
 }
+/* .custom-editor-font-size {
+  font-size: 20px; 
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  line-height: 1.55
+}
+.jodit-preview .custom-editor-font-size {
+  font-size: 20px; 
+  line-height: 1.5; 
+} */
+/* Change font size and line height for the editor content */
+.jodit-wysiwyg {
+  font-size: 20px; 
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  line-height: 1.55
+}
+
+/* MuiTypography-root MuiTypography-body1 css-wcyca3-MuiTypography-root */
+.MuiTypography-root p{
+  font-size: 20px; 
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  line-height: 1.55
+}
+
